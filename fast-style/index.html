@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link rel="icon" href="../img/chicken.png" type="image/x-icon">
+    <title>Fast Style</title>
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/bootstrap-theme.css" type="text/css">
+    <link rel="stylesheet" href="../css/docs.min.css" type="text/css">
+
+    <!-- main script -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/dropdown.js"></script>
+    <script src="tf.min.js"></script>
+ <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+ <script>
+$("input").change(function(e) {
+
+    for (var i = 0; i < e.originalEvent.target.files.length; i++) {
+        
+        var file = e.originalEvent.target.files[i];
+        
+        var img = document.createElement("img");
+        var reader = new FileReader();
+        reader.onloadend = function() {
+             img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+        $("input").after(img);
+    }
+});
+</script>
+<style>
+#status
+{ font-family: Geneva, Tahoma, Verdana, sans-serif;}
+
+#img
+{border-radius: 5%;}
+
+#lnk
+{ text-decoration: none; }
+
+#header
+{ font-family:  Verdana, sans-serif; font-size: 30px;}
+</style>
+
+</head>
+
+<body>
+<!-- header -->
+<header class="navbar navbar-static-top bs-docs-nav" id="top" style="margin-top: 0px">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="../index.html" class="navbar-brand">Cryptolalia</a>
+        </div>
+        <nav id="bs-navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="../index.html">Home</a>
+                </li>
+                <li >
+                    <a href="../sketcher/index.html">Draw Guess</a>
+                </li>
+                <li>
+                    <a href="#">Text-detection</a>
+                </li>
+                <li class="dropdown active" role="presentation">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" href="#">image<span class="caret"></span></a>
+                    <script>$('.dropdown-toggle').dropdown()</script>
+                    <ul class="dropdown-menu">
+                        <li><a href="../fast-style/index.html">Fast Image Style</a></li>
+                        <!--<li role="separator" class="divider"></li>-->
+                        <li><a href="../arbitrary-image-stylization-tfjs-master/index.html">Arbitary Image Stylization</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">something</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://github.com/cryptolalia/cryptolalia.github.io" target="_blank">
+                    Github Repository</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- container-->
+<div class="bs-docs-featurette" id="" tabindex="-1">
+    <div class="container">
+        <h1>Fast Style Transfer</h1>
+        <p> 这是一个简单测试，使用CNN，在Google Colab上训练了权重，在Github上托管的网页，参考了Sketcher的实验 <br/>
+            左边是原图，右边是风格转换后的图形，下方是五种风格模型. </p>
+        <footer class="blockquote-footer">--The Beautiful Flower</footer>
+    </div>
+</div>
+<br/>
+<br/>
+<!-- 正文部分 -->
+<!--<div id="header"> </div>-->
+<center> <canvas id="content" width="256" height="256" style="border:1px solid #9ca0a8; border-radius:5%;">
+</canvas> 
+<canvas id="combined" width="256" height="256" style="border:1px solid #9ca0a8; border-radius:5%;">
+</canvas> </center>
+
+<center style="padding:20px">
+<div id ="status">Click Image to load its model </div>
+<center>
+<center>
+<div style="padding:20px" style="border:1px solid #000000;">
+    <a id = "lnk" onclick="loadModel('style1/model.json')" href="#"> <img id = "img" src="images/style1.jpg" width = "50" height="50" > </a>
+    <a id = "lnk" onclick="loadModel('style2/model.json')" href="#"> <img id = "img" src="images/style2.jpg" width = "50" height="50"> </a>
+    <a id = "lnk" onclick="loadModel('style3/model.json')" href="#"> <img id = "img" src="images/style3.jpg" width = "50" height="50"> </a>
+    <a id = "lnk" onclick="loadModel('style4/model.json')" href="#"> <img id = "img" src="images/style4.jpg" width = "50" height="50"> </a>
+    <a id = "lnk" onclick="loadModel('style5/model.json')" href="#"> <img id = "img" src="images/style5.jpg" width = "50" height="50"> </a>
+
+</div>
+</center>
+<script>
+
+
+
+function preprocess(imgData)
+{
+return tf.tidy(()=>{
+    let tensor = tf.fromPixels(imgData).toFloat() ;
+
+    const offset = tf.scalar(127.5);
+    // Normalize the image 
+    const normalized = tensor.sub(offset).div(offset);
+  
+    //We add a dimension to get a batch shape 
+    const batched = normalized.expandDims(0)
+    return batched
+})
+}
+
+function deprocess(x)
+{ 
+
+return tf.tidy(()=>{
+    const offset = tf.scalar(127.5);
+    // Normalize the image 
+    const denormalized = x.mul(offset).add(offset).toInt();
+    const reduced = denormalized.squeeze()
+    return reduced
+})
+}
+
+
+function toPixels(tensor, canvas) {
+    const ctx = canvas.getContext('2d');
+    const [height, width] = tensor.shape;
+
+    const buffer = new Uint8ClampedArray(width * height * 4)
+    const imageData = new ImageData(width, height);
+    const data = tensor.dataSync();
+    var cnt = 0;
+    for(var y = 0; y < height; y++) {
+        for(var x = 0; x < width; x++) {
+            var pos = (y * width + x) * 4; // position in buffer based on x and y
+            buffer[pos  ] = data[cnt]           // some R value [0, 255]
+            buffer[pos+1] = data[cnt+1]           // some G value
+            buffer[pos+2] = data[cnt+2]           // some B value
+            buffer[pos+3] = 255;           // set alpha channel
+            cnt+=3
+        }
+    }
+    imageData.data.set(buffer)
+
+    ctx.putImageData(imageData, 0, 0);
+}
+
+async function createImg(path)
+{
+  return await new Promise((resolve, reject) => {
+  let i = new Image();
+  i.onload = () => resolve(i);
+  i.onerror = reject;
+  i.crossOrigin = 'anonymous';
+  i.src = path;
+  i.width = 256;
+  i.height = 256;
+  })
+  
+}
+
+async function createModel(path)
+{
+    let model = await tf.loadModel(path)
+    return model
+}
+
+async function loadModel(path = 'style1/model.json')
+{
+    var lbl = document.getElementById("status");
+    lbl.innerText = "Model Loading ..." 
+    let canvas = document.getElementById("combined");
+    let cT = preprocess(cImg)
+    const model = await createModel(path)
+    z = model.predict(cT)
+    toPixels(deprocess(z), canvas) 
+    lbl.innerText = "Model Created ..."
+}
+
+async function initialize()
+{
+    var c1 = document.getElementById("content");
+    cImg = await createImg('rose.jpg')
+    var ctx1 = c1.getContext('2d');
+    ctx1.drawImage(cImg,0,0,cImg.width,cImg.width);
+}
+
+var cImg;
+initialize()
+
+</script>
+
+<!-- footer-->
+<footer class="bs-docs-footer">
+        <div class="container" style="margin-left:500px ;">
+            <ul class="bs-docs-footer-links">
+                <li><a href="https://github.com/cryptolalia/cryptolalia.github.io">GitHub 仓库</a></li>
+                <li><a href="https://www.tensorflow.org/js/demos/">更多</a></li>
+                <li><a href="../about.html">关于</a></li>
+            </ul>
+            <p>Designed with all the love in the world by cryptolalia . The page templates by the <a href="http://cryptolalia.top/">Web</a> built with the help of <a href="https://v3.bootcss.com/">Bootstrap</a>.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
