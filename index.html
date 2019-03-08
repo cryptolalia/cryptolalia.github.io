@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="TensorFlow.js is an open-source hardware-accelerated JavaScript library for training and deploying machine learning models." />
+    <meta property="og:title" content="tensorflow.js - JavaScript library for DL" />
+    <meta property="og:type" content="website" />
+
+
+    <title>Cryptolalia's world</title>
+    <link rel="icon" href="img/cupcake.png" type="image/x-icon">
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/dropdown.js"></script>
+    <!-- Custom CSS -->
+    <link href="css/freelancer.css?3" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/styles/color-brewer.min.css">
+    <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+<body id="page-top" class="index">
+
+<!-- Right side, white on black -->
+<a href="https://github.com/tensorflow/tfjs" class="github-corner" style="position: fixed; top: 0; right: 0;"><svg width="80" height="80" viewBox="0 0 250 250" style="fill: rgba(21, 21, 19, 0.53); color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+<!-- Header -->
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <img class="img-responsive main-logo" src="img/lemon.png" alt="Lemon">
+                <div class="intro-text">
+                    <span class="name">深度学习</span>
+                    <span class="skills">使用 JavaScript 构建网页端学习模型</span>
+                </div>
+            </div>
+            <div class="col-lg-10 col-lg-offset-1 text-center">
+                <a title="click to play" href="sketcher/index.html" class="btn btn-lg btn-outline">
+                    <i class="glyphicon glyphicon-knight"></i> You pie,AI Guess
+                </a>
+                <a title="click to play" href="texter/index.html" class="btn btn-lg btn-outline">
+                    <i class="glyphicon glyphicon-queen"></i> Text Detection
+                </a>
+                <div class="btn-group">
+                    <button type="button" title="click to play" class="tip btn btn-lg dropdown-toggle btn-outline"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                        <i class="glyphicon glyphicon-king"></i>Image Style<span class="caret"></span>
+                    </button>
+                    <script>$('.dropdown-toggle').dropdown()</script>
+                    <ul class="dropdown-menu btn-lg btn-outline ">
+                        <li><a href="fast-style/index.html">Fast Image Style</a></li>
+                        <!--<li role="separator" class="divider"></li>-->
+                        <li><a href="arbitrary-image-stylization-tfjs-master/index.html">Arbitary Image Stylization</a></li>
+                    </ul>
+                </div>
+
+                <a title="click to learn" href="https://github.com/cryptolalia/cryptolalia.github.io" class="btn btn-lg btn-outline">
+                    <i class="fa fa-github"></i> Github Repo
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Example</h2>
+                <hr class="star-primary" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3>Draw or Guess</h3>
+                <p>
+                    We will use a programming framework with TensorFlow as the back end and Keras as the front end.
+                    Due to limited memory capacity, we will not use all categories of images for training.
+                    We use only 100 categories in the dataset.
+                </p>
+                <br>
+                <h4>Data Pre-Processing <small>(runs on Google Colab GPU)</small></h4>
+                <p>We preprocess the data to prepare for the training model.</p>
+                <br/>
+                <h4>Create Model</h4>
+                <p>We'll convert the model to a browser and run it again, hoping that the model will run quickly in predictive tasks.
+                    This model consists of 3 convolutional layers and 2 fully connected layers.</p>
+                <br/>
+                <h4 >Prepare model in WEB format</h4>
+                <p>install tensorflow.js , save model in the 'kersa.h5', then mkdir the model directory.</p>
+                <pre><code class="js hljs javascript" style="background: transparent;">!tensorflowjs_converter --input_format keras keras.h5 model/</code></pre>
+                <p>use Zip compression the model for download.</p>
+                <pre><code class="js hljs javascript" style="background: transparent;">!zip -r model.zip model
+from google.colab import files
+files.download('model.zip')
+</code></pre>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr />
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Tensorflow Support</h2>
+                <hr class="star-primary" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <p>
+                    There are two main ways to get TensorFlow.js in your JavaScript project: via script tags or by installing it from NPM and using a build tool like Parcel, WebPack, or Rollup.
+                </p>
+                <div class="highlight highlight-text-html-basic">
+                    <pre id="texture-mode-disabled"><code class="js hljs javascript" style="background: transparent;">&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+    <span class="pl-c"><span class="pl-c">&lt;!--</span> Load TensorFlow.js <span class="pl-c">--&gt;</span></span>
+    &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js<span class="pl-pds">"</span></span>&gt;<span class="pl-s1"> </span>&lt;/<span class="pl-ent">script</span>&gt;
+    <span class="pl-c"><span class="pl-c">&lt;!--</span> Place your code in the script tag below. You can also use an external .js file <span class="pl-c">--&gt;</span></span>
+    &lt;<span class="pl-ent">script</span>&gt;<span class="pl-s1"></span>
+        <span class="pl-s1"><span class="pl-c"><span class="pl-c">//</span> Notice there is no 'import' statement. 'tf' is available on the index-page</span></span>
+        <span class="pl-s1"><span class="pl-c"><span class="pl-c">//</span> because of the script tag above.</span></span>
+        <span class="pl-s1"></span>
+        <span class="pl-s1"><span class="pl-c"><span class="pl-c">//</span> Define a model for linear regression.</span></span>
+        <span class="pl-s1"><span class="hljs-keyword">const</span> <span class="pl-c1">model</span> <span class="pl-k">=</span> <span class="pl-smi">tf</span>.<span class="pl-en">sequential</span>();</span>
+        <span class="pl-s1"><span class="pl-smi">model</span>.<span class="pl-c1">add</span>(<span class="pl-smi">tf</span>.<span class="pl-c1">layers</span>.<span class="pl-en">dense</span>({units<span class="pl-k">:</span> <span class="hljs-number">1</span>, inputShape<span class="pl-k">:</span> [<span class="hljs-number">1</span>]}));</span>
+        <span class="pl-s1"></span>
+        <span class="pl-s1"><span class="pl-c"><span class="pl-c">//</span> Prepare the model for training: Specify the loss and the optimizer.</span></span>
+        <span class="pl-s1"><span class="pl-smi">model</span>.<span class="pl-c1">compile</span>({loss<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>meanSquaredError<span class="pl-pds">'</span></span>, optimizer<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>sgd<span class="pl-pds">'</span></span>});</span>
+        <span class="pl-s1"></span>
+        <span class="pl-s1"><span class="pl-c"><span class="pl-c">//</span> Generate some synthetic data for training.</span></span>
+        <span class="pl-s1"><span class="hljs-keyword">const</span> <span class="pl-c1">xs</span> <span class="pl-k">=</span> <span class="pl-smi">tf</span>.<span class="pl-en">tensor2d</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">1</span>]);</span>
+        <span class="pl-s1"><span class="hljs-keyword">const</span> <span class="pl-c1">ys</span> <span class="pl-k">=</span> <span class="pl-smi">tf</span>.<span class="pl-en">tensor2d</span>([<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>], [<span class="hljs-number">4</span>, <span class="hljs-number">1</span>]);</span>
+        <span class="pl-s1"></span>
+        <span class="pl-s1"><span class="pl-c"><span class="pl-c">//</span> Train the model using the data.</span></span>
+        <span class="pl-s1"><span class="pl-smi">model</span>.<span class="pl-en">fit</span>(xs, ys).<span class="pl-c1">then</span>(() <span class="hljs-keyword">=&gt;</span> {</span>
+        <span class="pl-s1"><span class="pl-c"><span class="pl-c">//</span> Use the model to do inference on a data point the model hasn't seen before:</span></span>
+        <span class="pl-s1"><span class="pl-c"><span class="pl-c">//</span> Open the browser devtools to see the output</span></span>
+        <span class="pl-s1"><span class="pl-smi">model</span>.<span class="pl-en">predict</span>(<span class="pl-smi">tf</span>.<span class="pl-en">tensor2d</span>([<span class="hljs-number">5</span>], [<span class="hljs-number">1</span>, <span class="hljs-number">1</span>])).<span class="pl-c1">print</span>();</span>
+        <span class="pl-s1">});</span>
+    <span class="pl-s1"></span>&lt;/<span class="pl-ent">script</span>&gt;
+    &lt;/<span class="pl-ent">head</span>&gt;
+
+    &lt;<span class="pl-ent">body</span>&gt;
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr />
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Google Colab</h2>
+                <hr class="star-primary" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <p>
+                    Running Basic Python Codes with Google Colab.Google Colab is a free cloud service and now it supports free GPU!
+                </p>
+                <ol><strong>You can:</strong>
+                    <li>
+                        improve your <b>Python</b> programming language coding skills.
+                    </li>
+                    <li>
+                        develop deep learning applications using popular libraries such as Keras, TensorFlow, PyTorch, and OpenCV.
+                    </li>
+                    <li>
+                        Colab provides GPU K80 and is totally free.
+                    </li>
+                </ol>
+                <div id="benchmark-plot-mbp2012"></div>
+                <p>You can use Google Colab on Google Drive.</p>
+                <ul>
+                    <li>
+                        <strong>Local Hardware:</strong> i5-4200H + GTX960
+                    </li>
+                    <li>
+                        <strong>Local Operating System:</strong> Windows 10 (Build 17763.316)
+                    </li>
+                    <li>
+                        <strong>Browser:</strong>
+                        <!--<div>-->
+                            <!--<span style="background-color: rgb(237, 111, 33); width: 15px; height: 14px; display: inline-block; border-radius: 7px;"></span> Firefox 54.0.1 (32-Bit)-->
+                        <!--</div>-->
+                        <div>
+                            <span style="background-color: aqua; width: 15px; height: 14px; display: inline-block; border-radius: 7px;"></span> Chrome 72.0.3626.109 (64-Bit)
+                        </div>
+                        <div>
+                            <span style="background-color: chocolate; width: 15px; height: 14px; display: inline-block; border-radius: 7px;"></span> Edge 44.17763.1.0 (64-Bit)
+                        </div>
+                    </li>
+                </ul>
+                <div id="benchmark-plot-gtx1080"></div>
+                <p>
+                    <strong>Last Updated: </strong> 2019-03-07
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Awards Section -->
+<section class="hacknroll" id="accolades">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <i class="glyphicon glyphicon-grain" style="font-size: 100px;"></i>
+                <h3>Better 2019</h3>
+                <p>
+                    This page is mainly used for study and research, non-commercial.<br/>
+                    Meantime,thanks for GPU.JS Team anywhere.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center">
+    <div class="footer-below">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    Copyright &copy; 2019 Cryptolalia.top.
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
+<div class="scroll-top page-scroll visible-xs visible-sm">
+    <a class="btn btn-primary" href="#page-top">
+        <i class="fa fa-chevron-up"></i>
+    </a>
+</div>
+
+</body>
+</html>

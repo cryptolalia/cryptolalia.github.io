@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link rel="icon" href="../img/strawberry.png" type="image/x-icon">
+  <title>Draw,Guess</title>
+
+<!-- bootstrap css -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="../css/bootstrap-theme.css" type="text/css">
+  <link rel="stylesheet" href="../css/docs.min.css" type="text/css">
+
+<!-- css pie -->
+<link rel="stylesheet" href="pie.css">
+
+<!-- TensorFlow.js script -->
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"> </script>
+	
+<!-- canvas script -->
+<script src="fabric.js"></script>
+	
+<!-- main script -->
+<script src="../js/jquery.min.js"></script>
+<script src = "main.js" > </script>
+<script src="../js/dropdown.js"></script>
+<!-- main css -->
+<link rel = "stylesheet" href="main.css" >
+	
+</head>
+<body>
+<div class="pace  pace-inactive"><div class="pace-progress" data-progress-text="100%" data-progress="99" style="width: 100%;">
+  <div class="pace-progress-inner"></div>
+</div>
+  <div class="pace-activity"></div></div>
+
+<!-- header -->
+<header class="navbar navbar-static-top bs-docs-nav" id="top">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="../index.html" class="navbar-brand">Cryptolalia</a>
+    </div>
+    <nav id="bs-navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="../index.html">Home</a>
+        </li>
+        <li class="active">
+          <a href="#">Draw Guess</a>
+        </li>
+        <li >
+          <a href="../texter/index.html">Text-detection</a>
+        </li>
+        <li class="dropdown" role="presentation">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" href="#">image<span class="caret"></span></a>
+          <script>$('.dropdown-toggle').dropdown()</script>
+          <ul class="dropdown-menu">
+            <li><a href="../fast-style/index.html">Fast Image Style</a></li>
+            <!--<li role="separator" class="divider"></li>-->
+            <li><a href="../arbitrary-image-stylization-tfjs-master/index.html">Arbitary Image Stylization</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="../customize/">something</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://github.com/cryptolalia/cryptolalia.github.io" target="_blank">
+          Github Repository</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- container-->
+<div class="bs-docs-featurette" id="content" tabindex="-1">
+  <div class="container">
+    <h1>You Draw , AI Guess</h1>
+    <p> 这是一个简单测试，使用CNN，在Google Colab上训练了权重，在Github上托管的网页，参考了Sketcher的实验 <br/>
+      使用了<a href='https://github.com/googlecreativelab/quickdraw-dataset'>quick draw 数据集</a>训练了<a href='https://github.com/zaidalyafeai/zaidalyafeai.github.io/blob/master/sketcher/mini_classes.txt'>100种类型</a> .
+      你可以在左侧画图，右侧只显示Top 5的预测. </p>
+    <footer class="blockquote-footer">--Thanks for ZAID ALYAFEAI</footer>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 col-md-4" style ='margin-left:400px;'>
+    <h4 id ='status' >Loading Model... </h4>
+    <canvas id="canvas" width="300" height="300" class="canvas" style="border:1px solid #b9bfc9;margin-top:25px;"></canvas>
+    <div class="btn-group" style = 'margin-top:40px; '>
+      <input type="range" min="5" max="20" value="10" class="slider" id="myRange" style ='margin-top:20px;width: 230px;float: left'>
+      <button type="button" class="btn" onclick ='erase()' style ='margin-left:30px;' >Clear</button>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <section style="margin-top:120px">
+    <div class="pieID pie">
+      
+    </div>
+    <ul class="pieID legend">
+      <li>
+        <em id = "sym1"></em>
+        <span id = "prob1" ></span>
+      </li>
+      <li>
+        <em id = "sym2"></em>
+        <span id = "prob2"></span>
+      </li>
+      <li>
+        <em id = "sym3"></em>
+        <span id = "prob3"></span>
+      </li>
+      <li>
+        <em id = "sym4"></em>
+        <span id = "prob4"></span>
+      </li>
+      <li>
+        <em id = "sym5"></em>
+        <span id = "prob5"></span>
+      </li>
+    </ul>
+  </section>
+  </div>
+</div>
+
+<!-- footer-->
+<footer class="bs-docs-footer">
+  <div class="container" style="margin-left:500px ;">
+    <ul class="bs-docs-footer-links">
+      <li><a href="https://github.com/cryptolalia/cryptolalia.github.io">GitHub 仓库</a></li>
+      <li><a href="https://www.tensorflow.org/js/demos/">更多</a></li>
+      <li><a href="../about.html">关于</a></li>
+    </ul>
+    <p>Designed with all the love in the world by cryptolalia . The page templates by the <a href="http://cryptolalia.top/">Web</a> built with the help of <a href="https://v3.bootcss.com/">Bootstrap</a>.</p>
+  </div>
+</footer>
+
+</body>
+<script src="pie.js"></script>
+<script>
+	console.log('starting');
+	start('en')
+</script>
+</html>
