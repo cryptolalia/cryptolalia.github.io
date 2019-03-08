@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Face Segmentation</title><link rel="icon" href="../img/fesh.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+  <!-- Load TensorFlow.js -->
+  <script src="tf.min.js"> </script>
+
+  <!-- main script -->
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/dropdown.js"></script>
+  <!-- bootstrap css -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css">
+  <link rel="stylesheet" href="../css/bootstrap-theme.css" type="text/css">
+  <link rel="stylesheet" href="../css/docs.min.css" type="text/css">
+
+</head>
+
+<body>
+<!-- header -->
+<header class="navbar navbar-expand-lg navbar-light bs-docs-nav" id="top">
+    <a href="https://github.com/reiinakano/arbitrary-image-stylization-tfjs" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <input type="file" id="file-select" style="display: none" accept="image/x-png,image/gif,image/jpeg"/>
+    <div class="container">
+        <a class="navbar-brand" href="#">Cryptolalia</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item ">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Draw Guess</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Text-detection</a>
+                </li>
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Image Style
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="../fast-style/index.html">Fast Image Style</a>
+                        <a class="dropdown-item" href="#">Arbitary Image Stylization</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="../WST/index.html">Something Bad</a>
+                    </div>
+                </li>
+            </ul>
+            <!--<form class="form-inline my-2 my-lg-0">-->
+            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+            <!--</form>-->
+
+        </div>
+
+    </div>
+</header>
+
+<!-- container-->
+<div class="bs-docs-featurette" id="content" tabindex="-1">
+    <div class="container">
+        <h1>Arbitrary Style Transfer</h1>
+        <p> Real-time style transfer using pix2pix trained on synthetic data extracted from a images that are styled using this <a href = 'https://github.com/misgod/fast-neural-style-keras'>model</a>.</p>
+        <footer class="blockquote-footer">(Maybe something wrong happened.)</footer>
+    </div>
+</div>
+
+<!-- 正文内容 -->
+<div class="d-flex justify-content-center align-items-center" style="margin-top: 40px">
+  <video id="video" width = "256" height="256" playsinline style="display:none;"></video>
+  <canvas id="canvas" width = "256" height="256"></canvas>
+  <canvas id="gCanvas" width = "256" height="256" ></canvas>
+</div>
+<div class="container-fluid" style="margin-top: 40px">
+    <!--<blockquote class="blockquote text-justify" style="margin:30px;">-->
+    <h4 style="margin-left: 777px">
+        When it's ok , You should push the button to start.
+        <button type="button" id = 'start' class="btn btn-outline-primary" onclick ='startPred()' disabled>Start</button>
+    </h4>
+    <!--</blockquote>-->
+</div>
+
+<!-- footer-->
+<footer class="bs-docs-footer">
+    <div class="container" style="margin-left:500px ;">
+        <ul class="bs-docs-footer-links">
+            <li><a href="https://github.com/cryptolalia/cryptolalia.github.io">GitHub 仓库</a></li>
+            <li><a href="https://www.tensorflow.org/js/demos/">更多</a></li>
+            <li><a href="../about.html">关于</a></li>
+        </ul>
+        <p>Designed with all the love in the world by cryptolalia . The page templates by the <a href="http://cryptolalia.top/">Web</a> built with the help of <a href="https://v3.bootcss.com/">Bootstrap</a>.</p>
+    </div>
+</footer>
+
+<script type="text/javascript" src = 'segment.js'>
+</script>
+</body>
+</html>
